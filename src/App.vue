@@ -1,6 +1,10 @@
 <template>
   <Header/>
-  <router-view/>
+  <div class="middle">
+    <main>
+      <router-view/>
+    </main>
+  </div>
   <Footer/>
 </template>
 
@@ -19,5 +23,5 @@ export default {
 </script>
 
 <style lang="scss">
-
+@import 'assets/css/styles.scss';
 </style>

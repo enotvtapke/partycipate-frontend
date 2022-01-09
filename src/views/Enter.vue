@@ -40,7 +40,9 @@ export default {
     }
   },
   methods: {
-
+    onEnter: function () {
+      // TODO
+    }
   }
 }
 </script>

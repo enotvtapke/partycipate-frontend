@@ -1,0 +1,33 @@
+:root {
+  --border-color: rgb(185, 185, 185);
+  --border-radius: 6px;
+  --black-color: #333;
+  --caption-color: #3B5998;
+  --error-color: red;
+  color: var(--black-color);
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+body, html {
+  height: 100%;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.middle {
+  flex: 1 1 auto;
+}
+
+footer {
+  border-top: 2px var(--border-color) solid;
+  height: 5rem;
+}
