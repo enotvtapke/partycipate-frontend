@@ -58,12 +58,16 @@ export default {
       if (!this.v$.$error) {
         const login = this.login
         const password = this.password
-        axios.post('/api/v1/user/enter', {
-          login, password
-        }).then(user => {
-          console.log(user)
+        axios.get('/api/v1/user/enter', {
+          params: {
+            login,
+            password
+          }
+        }).then(response => {
+          console.log(response.data)
         }).catch(error => {
-          this.serverValidationError = error
+          console.log(error.response.data)
+          this.serverValidationError = error.response.data
         })
       }
     }
