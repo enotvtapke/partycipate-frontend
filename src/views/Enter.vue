@@ -65,8 +65,8 @@ export default {
           }
         }).then(response => {
           console.log(response.data)
+          // TODO
         }).catch(error => {
-          console.log(error.response.data)
           this.serverValidationError = error.response.data
         })
       }
