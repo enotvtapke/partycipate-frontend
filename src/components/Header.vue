@@ -7,14 +7,21 @@
       </ul>
     </nav>
     <div class="nav-enter">
-      <router-link to="/enter">Enter</router-link>
+      <router-link v-if="user" to="/">{{ user.login }}</router-link>
+      <router-link v-else to="/enter">Enter</router-link>
     </div>
   </header>
 </template>
 
 <script>
+
 export default {
-  name: 'Header.vue'
+  name: 'Header.vue',
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  }
 }
 </script>
 
