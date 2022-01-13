@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
@@ -18,6 +17,12 @@ export default {
   components: {
     Header,
     Footer
+  },
+  beforeMount () {
+    const jwt = localStorage.getItem('jwt')
+    if (jwt && !this.user) {
+      this.$store.dispatch('auth', jwt)
+    }
   }
 }
 </script>

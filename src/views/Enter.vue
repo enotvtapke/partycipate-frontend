@@ -58,14 +58,15 @@ export default {
       if (!this.v$.$error) {
         const login = this.login
         const password = this.password
-        axios.get('/api/v1/user/enter', {
+        axios.get('/api/v1/user/createJwt', {
           params: {
             login,
             password
           }
         }).then(response => {
-          console.log(response.data)
-          // TODO
+          const jwt = response.data
+          localStorage.setItem('jwt', jwt)
+          this.$store.dispatch('auth', jwt)
         }).catch(error => {
           this.serverValidationError = error.response.data
         })
