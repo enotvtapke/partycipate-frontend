@@ -1,33 +1,9 @@
 <template>
   <div class="register-form form-box">
     <form @submit.prevent>
-      <div class="field" :class="{ error: v$.login.$error }">
-        <div class="name">
-          <label for="login">Login</label>
-        </div>
-        <div class="value">
-          <input id="login" name="login" v-model.lazy="login" autocomplete="off">
-          <div class="error-message" v-if="v$.login.$errors.length > 0">{{ v$.login.$errors[0].$message }}</div>
-        </div>
-      </div>
-      <div class="field" :class="{ error: v$.name.$error }">
-        <div class="name">
-          <label for="name">Name</label>
-        </div>
-        <div class="value">
-          <input id="name" name="name" v-model="name" autocomplete="off"/>
-          <div class="error-message" v-if="v$.name.$error">{{ v$.name.$errors[0].$message }}</div>
-        </div>
-      </div>
-      <div class="field" :class="{ error: v$.password.$error }">
-        <div class="name">
-          <label for="password">Password</label>
-        </div>
-        <div class="value">
-          <input id="password" name="password" type="password" v-model="password"/>
-          <div class="error-message" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</div>
-        </div>
-      </div>
+      <InputField v-model="login" :validator="v$.login" fieldName="Login" :debounce="true"></InputField>
+      <InputField v-model="name" :validator="v$.name" fieldName="Name"></InputField>
+      <InputField v-model="password" :validator="v$.password" fieldName="Password" type="password"></InputField>
       <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
       <div class="button-field">
         <input @click="onRegister" type="submit" value="Enter">
@@ -39,23 +15,11 @@
 <script>
 import useValidate from '@vuelidate/core'
 import { helpers, required, minLength, maxLength, alphaNum } from '@vuelidate/validators'
-import axios from 'axios'
-import { enter, register } from '@/utils/userUtils'
-
-async function isVacant (value) {
-  return await axios.get('/api/v1/user/isLoginVacant', {
-    params: {
-      login: value
-    }
-  }).then((response) => {
-    return response.data
-  }).catch(() => {
-    return false
-  })
-}
+import { enter, register, isLoginVacant } from '@/utils/userUtils'
+import InputField from '@/components/UI/InputField'
 
 export default {
-  name: 'Register.vue',
+  name: 'Register',
   data: function () {
     return {
       v$: useValidate(),
@@ -66,6 +30,7 @@ export default {
       debounceTimer: null
     }
   },
+  components: { InputField },
   methods: {
     onRegister () {
       this.v$.$validate()
@@ -88,7 +53,7 @@ export default {
         minLength: helpers.withMessage('Login is too short', minLength(4)),
         maxLength: helpers.withMessage('Login is too long', maxLength(32)),
         alphaNum: helpers.withMessage('Login should contain only letters and digits', alphaNum),
-        isVacant: helpers.withMessage('Login is already in use', helpers.withAsync(isVacant)),
+        isLoginVacant: helpers.withMessage('Login is already in use', helpers.withAsync(isLoginVacant)),
         $autoDirty: true
       },
       name: {

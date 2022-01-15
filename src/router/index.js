@@ -6,6 +6,7 @@ import NotFound from '@/views/NotFound'
 import store from '@/store'
 import { auth } from '@/utils/userUtils'
 import Register from '@/views/Register'
+import CreateEvent from '@/views/CreateEvent'
 
 const routes = [
   {
@@ -29,6 +30,12 @@ const routes = [
     path: '/user/:login',
     name: 'User',
     component: User
+  },
+  {
+    path: '/event',
+    name: 'CreateEvent',
+    component: CreateEvent,
+    meta: { auth: true }
   },
   {
     path: '/:pathMatch(.*)*',
