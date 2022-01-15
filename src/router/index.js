@@ -45,7 +45,11 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const jwt = localStorage.getItem('jwt')
   if (jwt && !store.getters.isAuth) {
-    await auth(jwt)
+    try {
+      await auth(jwt)
+    } catch (e) {
+      localStorage.removeItem('jwt')
+    }
   }
   if (to.meta.auth === undefined) {
     return true

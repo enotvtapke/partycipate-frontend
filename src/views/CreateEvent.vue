@@ -1,15 +1,6 @@
 <template>
-  <div class="register-form form-box">
+  <div class="form-box">
     <form @submit.prevent>
-      <div class="field" :class="{ error: v$.login.$error }">
-        <div class="name">
-          <label for="login">Login</label>
-        </div>
-        <div class="value">
-          <input id="login" name="login" v-model.lazy="login" autocomplete="off">
-          <div class="error-message" v-if="v$.login.$errors.length > 0">{{ v$.login.$errors[0].$message }}</div>
-        </div>
-      </div>
       <div class="field" :class="{ error: v$.name.$error }">
         <div class="name">
           <label for="name">Name</label>
@@ -19,13 +10,13 @@
           <div class="error-message" v-if="v$.name.$error">{{ v$.name.$errors[0].$message }}</div>
         </div>
       </div>
-      <div class="field" :class="{ error: v$.password.$error }">
+      <div class="field" :class="{ error: v$.date.$error }">
         <div class="name">
-          <label for="password">Password</label>
+          <label for="name">Name</label>
         </div>
         <div class="value">
-          <input id="password" name="password" type="password" v-model="password"/>
-          <div class="error-message" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</div>
+          <input id="name" name="name" v-model="name" autocomplete="off"/>
+          <div class="error-message" v-if="v$.name.$error">{{ v$.name.$errors[0].$message }}</div>
         </div>
       </div>
       <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
@@ -59,11 +50,11 @@ export default {
   data: function () {
     return {
       v$: useValidate(),
-      login: '',
       name: '',
-      password: '',
-      serverValidationError: '',
-      debounceTimer: null
+      date: null,
+      location: null,
+      description: null,
+      price: null
     }
   },
   methods: {
