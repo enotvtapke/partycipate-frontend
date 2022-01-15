@@ -61,7 +61,7 @@ export default {
         const login = this.login
         const password = this.password
         enter(login, password).then(() => {
-          this.$router.push('/')
+          this.$router.push({ name: 'Index' })
         }).catch(error => {
           this.serverValidationError = error.data
         })

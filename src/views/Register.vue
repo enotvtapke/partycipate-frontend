@@ -72,7 +72,7 @@ export default {
       if (!this.v$.$error) {
         register(this.login, this.name, this.password).then(response => {
           enter(response.login, this.password).then(() => {
-            this.$router.push('/')
+            this.$router.push({ name: 'Index' })
           })
         }).catch(error => {
           this.serverValidationError = error.data
