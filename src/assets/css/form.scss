@@ -1,0 +1,23 @@
+.error {
+    border-color: red;
+}
+.form-box {
+    margin: auto;
+    width: 15rem;
+}
+.form-box .field {
+    margin-bottom: 1.5rem;
+}
+.error-message {
+    position: absolute;
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.form-error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.8rem;
+}

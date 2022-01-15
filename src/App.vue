@@ -17,16 +17,11 @@ export default {
   components: {
     Header,
     Footer
-  },
-  beforeMount () {
-    const jwt = localStorage.getItem('jwt')
-    if (jwt && !this.user) {
-      this.$store.dispatch('auth', jwt)
-    }
   }
 }
 </script>
 
 <style lang="scss">
 @import 'assets/css/styles.scss';
+@import 'assets/css/normalize.css';
 </style>

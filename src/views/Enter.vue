@@ -1,34 +1,36 @@
 <template>
   <div class="enter-form form-box">
-    <div class="field" :class="{ error: v$.login.$error }">
-      <div class="name">
-        <label for="login">Login</label>
+    <form @submit.prevent>
+      <div class="field" :class="{ error: v$.login.$error }">
+        <div class="name">
+          <label for="login">Login</label>
+        </div>
+        <div class="value">
+          <input id="login" name="login" v-model="login">
+          <div class="error-message" v-if="v$.login.$error">{{ v$.login.$errors[0].$message }}</div>
+        </div>
       </div>
-      <div class="value">
-        <input id="login" name="login" v-model="login">
-        <div class="error-message" v-if="v$.login.$error">{{ v$.login.$errors[0].$message }}</div>
+      <div class="field" :class="{ error: v$.password.$error }">
+        <div class="name">
+          <label for="password">Password</label>
+        </div>
+        <div class="value">
+          <input id="password" name="password" type="password" v-model="password"/>
+          <div class="error-message" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</div>
+        </div>
       </div>
-    </div>
-    <div class="field" :class="{ error: v$.password.$error }">
-      <div class="name">
-        <label for="password">Password</label>
+      <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
+      <div class="button-field">
+        <input @click="onEnter" type="submit" value="Enter">
       </div>
-      <div class="value">
-        <input id="password" name="password" type="password" v-model="password"/>
-        <div class="error-message" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</div>
-      </div>
-    </div>
-    <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
-    <div class="button-field">
-      <input @click="onEnter" type="submit" value="Enter">
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
 import useValidate from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
-import axios from 'axios'
+import { enter } from '@/utils/userUtils'
 
 export default {
   name: 'Enter',
@@ -58,17 +60,10 @@ export default {
       if (!this.v$.$error) {
         const login = this.login
         const password = this.password
-        axios.get('/api/v1/user/createJwt', {
-          params: {
-            login,
-            password
-          }
-        }).then(response => {
-          const jwt = response.data
-          localStorage.setItem('jwt', jwt)
-          this.$store.dispatch('auth', jwt)
+        enter(login, password).then(() => {
+          this.$router.push({ name: 'Index' })
         }).catch(error => {
-          this.serverValidationError = error.response.data
+          this.serverValidationError = error.data
         })
       }
     }
@@ -77,27 +72,5 @@ export default {
 </script>
 
 <style scoped>
-  .error {
-    border-color: red;
-  }
-  .form-box {
-    margin: auto;
-    width: 15rem;
-  }
-  .form-box .field {
-    margin-bottom: 1.5rem;
-  }
-  .error-message {
-    position: absolute;
-    color: red;
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
-  }
-
-  .form-error-message {
-    color: red;
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
-    margin-bottom: 0.8rem;
-  }
+@import '../assets/css/form.scss';
 </style>

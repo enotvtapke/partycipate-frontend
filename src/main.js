@@ -1,34 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { createStore } from 'vuex'
-import axios from 'axios'
-
-const store = createStore({
-  state () {
-    return {
-      user: null
-    }
-  },
-  mutations: {
-    setUser (state, user) {
-      state.user = user
-    }
-  },
-  actions: {
-    auth ({ commit }, jwt) {
-      axios.get('/api/v1/user/enter', {
-        params: {
-          jwt
-        }
-      }).then(response => {
-        commit('setUser', response.data)
-      }).catch(error => {
-        throw error
-      })
-    }
-  }
-})
+import store from '@/store'
 
 const app = createApp(App)
 app.use(router)

@@ -7,19 +7,35 @@
       </ul>
     </nav>
     <div class="nav-enter">
-      <router-link v-if="user" to="/">{{ user.login }}</router-link>
-      <router-link v-else to="/enter">Enter</router-link>
+      <template v-if="user">
+        <UserLink :user=user></UserLink>
+        |
+        <a href="#" @click.prevent="onLogout">Logout</a>
+      </template>
+      <template v-else>
+        <router-link to="/enter">Enter</router-link>
+        |
+        <router-link to="/register">Register</router-link>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
+import UserLink from '@/components/UI/UserLink'
+import { logout } from '@/utils/userUtils'
 
 export default {
   name: 'Header.vue',
+  components: { UserLink },
   computed: {
     user () {
-      return this.$store.state.user
+      return this.$store.getters.user
+    }
+  },
+  methods: {
+    onLogout () {
+      logout()
     }
   }
 }
