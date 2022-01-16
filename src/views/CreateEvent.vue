@@ -27,7 +27,7 @@ export default {
   data: function () {
     return {
       v$: useValidate(),
-      name: '',
+      name: null,
       date: null,
       location: null,
       description: null,
@@ -39,8 +39,8 @@ export default {
     onCreateEvent () {
       this.v$.$validate()
       if (!this.v$.$error) {
-        createEvent(this.name, this.date, this.location, this.description, this.price).then(response => {
-
+        createEvent(this.name, this.date, this.location, this.description, this.price).then(event => {
+          this.$router.push('/event/' + event.id)
         }).catch(error => {
           this.serverValidationError = error.data
         })

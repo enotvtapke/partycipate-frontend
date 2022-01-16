@@ -5,7 +5,12 @@
 <script>
 export default {
   name: 'UserLink',
-  props: ['user']
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 

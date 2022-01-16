@@ -15,4 +15,16 @@ async function createEvent (name, date, location, description, price) {
   })
 }
 
-export { createEvent }
+async function findById (id) {
+  return await axios.get('/api/v1/event/findById', {
+    params: {
+      id: id
+    }
+  }).then(response => {
+    return response.data
+  }).catch((error) => {
+    throw error
+  })
+}
+
+export { createEvent, findById }

@@ -7,6 +7,7 @@ import store from '@/store'
 import { auth } from '@/utils/userUtils'
 import Register from '@/views/Register'
 import CreateEvent from '@/views/CreateEvent'
+import EventPage from '@/views/EventPage'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     name: 'CreateEvent',
     component: CreateEvent,
     meta: { auth: true }
+  },
+  {
+    path: '/event/:id',
+    name: 'Event',
+    component: EventPage
   },
   {
     path: '/:pathMatch(.*)*',
