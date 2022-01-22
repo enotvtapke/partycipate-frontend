@@ -1,17 +1,17 @@
 <template>
-  <footer>
-    Eventer by idkwho
-  </footer>
+    <footer>
+        Eventer by idkwho
+    </footer>
 </template>
 
 <script>
 export default {
-  name: 'Footer.vue'
+    name: 'Footer.vue'
 }
 </script>
 
 <style scoped>
-  footer {
+footer {
     background-color: #fafafa;
-  }
+}
 </style>

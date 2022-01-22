@@ -1,16 +1,16 @@
 <template>
-  <router-link :to="'/user/' + user.login">{{ user.name }}</router-link>
+    <router-link :to="'/user/' + user.login">{{ user.name }}</router-link>
 </template>
 
 <script>
 export default {
-  name: 'UserLink',
-  props: {
-    user: {
-      type: Object,
-      required: true
+    name: 'UserLink',
+    props: {
+        user: {
+            type: Object,
+            required: true
+        }
     }
-  }
 }
 </script>
 

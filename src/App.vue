@@ -1,11 +1,11 @@
 <template>
-  <Header/>
-  <div class="middle">
-    <main>
-      <router-view/>
-    </main>
-  </div>
-  <Footer/>
+    <Header/>
+    <div class="middle">
+        <main>
+            <router-view/>
+        </main>
+    </div>
+    <Footer/>
 </template>
 
 <script>
@@ -13,11 +13,11 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export default {
-  name: 'App',
-  components: {
-    Header,
-    Footer
-  }
+    name: 'App',
+    components: {
+        Header,
+        Footer
+    }
 }
 </script>
 
