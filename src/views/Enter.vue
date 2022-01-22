@@ -1,24 +1,8 @@
 <template>
   <div class="enter-form form-box">
     <form @submit.prevent>
-      <div class="field" :class="{ error: v$.login.$error }">
-        <div class="name">
-          <label for="login">Login</label>
-        </div>
-        <div class="value">
-          <input id="login" name="login" v-model="login">
-          <div class="error-message" v-if="v$.login.$error">{{ v$.login.$errors[0].$message }}</div>
-        </div>
-      </div>
-      <div class="field" :class="{ error: v$.password.$error }">
-        <div class="name">
-          <label for="password">Password</label>
-        </div>
-        <div class="value">
-          <input id="password" name="password" type="password" v-model="password"/>
-          <div class="error-message" v-if="v$.password.$error">{{ v$.password.$errors[0].$message }}</div>
-        </div>
-      </div>
+      <InputField v-model="login" :validator="v$.login" fieldName="Login"></InputField>
+      <InputField v-model="password" :validator="v$.password" fieldName="Password" type="password"></InputField>
       <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
       <div class="button-field">
         <input @click="onEnter" type="submit" value="Enter">
@@ -31,6 +15,7 @@
 import useValidate from '@vuelidate/core'
 import { required, helpers } from '@vuelidate/validators'
 import { enter } from '@/utils/userUtils'
+import InputField from '@/components/UI/InputField'
 
 export default {
   name: 'Enter',
@@ -42,6 +27,7 @@ export default {
       serverValidationError: ''
     }
   },
+  components: { InputField },
   validations () {
     return {
       login: {

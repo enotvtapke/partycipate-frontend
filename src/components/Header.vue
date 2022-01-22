@@ -1,9 +1,10 @@
 <template>
   <header>
-    <router-link class="logo" to="/"><img alt="Eventer" src="@/assets/logo.png"></router-link>
+    <router-link class="logo" :to="{ name: 'Index' }"><img alt="Eventer" src="@/assets/logo.png"></router-link>
     <nav>
       <ul>
-        <li><router-link to="/">Home</router-link></li>
+        <li><router-link :to="{ name: 'Index' }">Home</router-link></li>
+        <li v-if="user"><router-link :to="{ name: 'CreateEvent' }">Create event</router-link></li>
       </ul>
     </nav>
     <div class="nav-enter">
@@ -51,6 +52,7 @@ export default {
   .logo img {
     padding-top: 0.25rem;
     height: 2rem;
+    margin-right: 2rem;
   }
 
   header * {
@@ -60,6 +62,10 @@ export default {
   header nav ul {
     margin: 0;
     padding: 0;
+  }
+
+  header nav li {
+    margin-right: 2rem;
   }
 
   .nav-enter {
