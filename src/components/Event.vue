@@ -5,18 +5,19 @@
     <div class="information">
       <div class="date">Date: {{ event.date }}</div>
       <div class="location">Location: {{ event.location }}</div>
+      <Map v-if="event.coords" :centerCoords="event.coords" :markerCoords="event.coords" style="width: 40rem"></Map>
       <div class="price">Price: {{ event.price }}</div>
     </div>
     <div class="description">{{ event.description }}</div>
-    <div class="footer">footer</div>
   </div>
 </template>
 
 <script>
 import UserLink from '@/components/UI/UserLink'
+import Map from '@/components/Map'
 export default {
   name: 'Event',
-  components: { UserLink },
+  components: { UserLink, Map },
   props: {
     event: {
       type: Object,
