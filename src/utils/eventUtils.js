@@ -30,4 +30,16 @@ async function findById (id) {
     })
 }
 
-export { createEvent, findById, updateEvent }
+async function findAllByCreatorLogin (login) {
+    return await axios.get('/api/v1/event/findAllByCreator', {
+        params: {
+            login
+        }
+    }).then(response => {
+        return response.data
+    }).catch((error) => {
+        throw error
+    })
+}
+
+export { createEvent, findById, updateEvent, findAllByCreatorLogin }

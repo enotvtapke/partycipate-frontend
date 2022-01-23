@@ -20,12 +20,12 @@ export default {
     beforeMount () {
         findById(this.$route.params.id).then(event => {
             if (event.creator.id !== this.$store.getters.user.id) {
-                this.$router.push({ name: 'NotFound' })
+                this.$router.push({ name: 'Index' })
             } else {
                 this.event = event
             }
         }).catch(() => {
-            this.event = null
+            this.$router.push({ name: 'NotFound' })
         })
     },
     methods: {

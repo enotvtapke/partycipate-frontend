@@ -28,6 +28,18 @@ async function auth (jwt) {
     })
 }
 
+async function findByLogin (login) {
+    return await axios.get('/api/v1/user/findByLogin', {
+        params: {
+            login
+        }
+    }).then(response => {
+        return response.data
+    }).catch(error => {
+        throw error
+    })
+}
+
 async function isLoginVacant (value) {
     return await axios.get('/api/v1/user/isLoginVacant', {
         params: {
@@ -57,4 +69,4 @@ function logout () {
     store.commit('setUser', null)
 }
 
-export { enter, logout, auth, register, isLoginVacant }
+export { enter, logout, auth, register, isLoginVacant, findByLogin }
