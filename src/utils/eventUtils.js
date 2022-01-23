@@ -1,15 +1,17 @@
 import axios from 'axios'
 
-async function createEvent (name, date, location, coords, description, price) {
-    return await axios.post('/api/v1/event/create', {
-        name,
-        date,
-        location,
-        coords,
-        description,
-        price,
-        jwt: localStorage.getItem('jwt')
-    }).then(response => {
+async function createEvent (event) {
+    event.jwt = localStorage.getItem('jwt')
+    return await axios.post('/api/v1/event/create', event).then(response => {
+        return response.data
+    }).catch(error => {
+        throw error.response
+    })
+}
+
+async function updateEvent (event) {
+    event.jwt = localStorage.getItem('jwt')
+    return await axios.post('/api/v1/event/update', event).then(response => {
         return response.data
     }).catch(error => {
         throw error.response
@@ -28,4 +30,4 @@ async function findById (id) {
     })
 }
 
-export { createEvent, findById }
+export { createEvent, findById, updateEvent }

@@ -1,4 +1,5 @@
 <template>
+    <link rel="icon" href="@/assets/favicon.ico">
     <header>
         <router-link class="logo" :to="{ name: 'Index' }"><img alt="Eventer" src="@/assets/logo.png"></router-link>
         <nav>

@@ -8,6 +8,7 @@ import { auth } from '@/utils/userUtils'
 import Register from '@/views/Register'
 import CreateEvent from '@/views/CreateEvent'
 import EventPage from '@/views/EventPage'
+import UpdateEvent from '@/views/UpdateEvent'
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: '/event/:id',
         name: 'Event',
         component: EventPage
+    },
+    {
+        path: '/event/:id/update',
+        name: 'EventUpdate',
+        component: UpdateEvent
     },
     {
         path: '/:pathMatch(.*)*',

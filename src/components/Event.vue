@@ -12,12 +12,14 @@
             <div class="price">Price: {{ event.price }}</div>
         </div>
         <div class="description">{{ event.description }}</div>
+        <router-link v-if="$store.getters.user.id === event.creator.id"
+           :to="{ name: 'EventUpdate' }">Update event</router-link>
     </div>
 </template>
 
 <script>
 import UserLink from '@/components/UI/UserLink'
-import Map from '@/components/Map'
+import Map from '@/components/UI/Map'
 
 export default {
     name: 'Event',
