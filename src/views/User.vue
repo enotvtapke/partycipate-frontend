@@ -2,8 +2,8 @@
     <div v-if="user" class="user-page">
         <p>{{ user.login }}</p>
         <p>{{ user.name }}</p>
-        <router-link v-if="$store.getters.user.id === user.id"
-                     :to="{ name: 'UserUpdate', params: { id: user.id } }">Update credentials</router-link>
+        <router-link v-if="$store.getters.user && $store.getters.user.id === user.id"
+                     :to="{ name: 'UpdateUser', params: { login: user.login } }">Update credentials</router-link>
         <EventList :events="userEvents"></EventList>
     </div>
     <div v-else-if="user === null">

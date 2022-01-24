@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="'/user/' + user.login">{{ user.name }}</router-link>
+    <router-link :to="{ name: 'User', params: { login: user.login } }">{{ user.name }}</router-link>
 </template>
 
 <script>

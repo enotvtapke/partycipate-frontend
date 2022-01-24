@@ -2,7 +2,7 @@
     <Header/>
     <div class="middle">
         <main>
-            <router-view/>
+            <router-view :key="this.$route.params.login"/>
         </main>
     </div>
     <Footer/>

@@ -9,6 +9,7 @@ import Register from '@/views/Register'
 import CreateEvent from '@/views/CreateEvent'
 import EventPage from '@/views/EventPage'
 import UpdateEvent from '@/views/UpdateEvent'
+import UpdateUser from '@/views/UpdateUser'
 
 const routes = [
     {
@@ -34,6 +35,11 @@ const routes = [
         component: User
     },
     {
+        path: '/user/:login/update',
+        name: 'UpdateUser',
+        component: UpdateUser
+    },
+    {
         path: '/event',
         name: 'CreateEvent',
         component: CreateEvent,
@@ -46,7 +52,7 @@ const routes = [
     },
     {
         path: '/event/:id/update',
-        name: 'EventUpdate',
+        name: 'UpdateEvent',
         component: UpdateEvent
     },
     {
