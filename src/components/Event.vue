@@ -13,7 +13,7 @@
         </div>
         <div class="description">{{ event.description }}</div>
         <router-link v-if="$store.getters.user.id === event.creator.id"
-           :to="{ name: 'EventUpdate', params: { id: event.id } }">Update event</router-link>
+           :to="{ name: 'UpdateEvent', params: { id: event.id } }">Update event</router-link>
     </div>
 </template>
 

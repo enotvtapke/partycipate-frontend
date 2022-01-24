@@ -16,6 +16,15 @@ async function enter (login, password) {
     })
 }
 
+async function update (user) {
+    user.jwt = localStorage.getItem('jwt')
+    return await axios.put('/api/v1/user/update', user).then(response => {
+        return response.data
+    }).catch(error => {
+        throw error.response
+    })
+}
+
 async function auth (jwt) {
     await axios.get('/api/v1/user/enter', {
         params: {
@@ -52,12 +61,8 @@ async function isLoginVacant (value) {
     })
 }
 
-async function register (login, name, password) {
-    return await axios.post('/api/v1/user/register', {
-        login,
-        name,
-        password
-    }).then(response => {
+async function register (user) {
+    return await axios.post('/api/v1/user/register', user).then(response => {
         return response.data
     }).catch(error => {
         throw error.response
@@ -69,4 +74,4 @@ function logout () {
     store.commit('setUser', null)
 }
 
-export { enter, logout, auth, register, isLoginVacant, findByLogin }
+export { enter, logout, auth, register, isLoginVacant, findByLogin, update }
