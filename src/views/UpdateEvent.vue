@@ -1,5 +1,6 @@
 <template>
-    <EventForm v-if="event" :serverValidationError="serverValidationError" :eventProp="event" @submit="onUpdateEvent"></EventForm>
+    <EventForm v-if="event" :serverValidationError="serverValidationError" :eventProp="event"
+               @submit="onUpdateEvent"></EventForm>
 </template>
 
 <script>

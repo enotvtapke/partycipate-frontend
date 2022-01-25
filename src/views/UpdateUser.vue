@@ -33,7 +33,10 @@ export default {
             if (!this.v$.$error) {
                 update(this.user).then(response => {
                     auth(localStorage.getItem('jwt'))
-                    this.$router.push({ name: 'User', params: { login: response.login } })
+                    this.$router.push({
+                        name: 'User',
+                        params: { login: response.login }
+                    })
                 }).catch(error => {
                     this.serverValidationError = error.data
                 })
