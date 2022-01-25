@@ -3,7 +3,8 @@
         <form @submit.prevent>
             <InputField v-model="user.login" :validator="v$.user.login" fieldName="Login" :debounce="true"></InputField>
             <InputField v-model="user.name" :validator="v$.user.name" fieldName="Name"></InputField>
-            <InputField v-model="user.password" :validator="v$.user.password" fieldName="Password" type="password"></InputField>
+            <InputField v-model="user.password" :validator="v$.user.password" fieldName="Password"
+                        type="password"></InputField>
             <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
             <div class="button-field">
                 <input @click="onRegister" type="submit" value="Enter">
