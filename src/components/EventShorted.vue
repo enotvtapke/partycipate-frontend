@@ -3,29 +3,23 @@
         <div class="creator">By:
             <UserLink :user="event.creator"></UserLink>
         </div>
-        <div class="name"><h2>{{ event.name }}</h2></div>
+        <router-link :to="{ name: 'Event', params: { id: event.id } }" class="name"><h2>{{ event.name }}</h2></router-link>
         <div class="information">
             <div class="date">Date: {{ event.date }}</div>
             <div class="location">Location: {{ event.location }}</div>
-            <Map v-if="event.coords" :centerCoords="event.coords" :markerCoords="event.coords"
-                 style="width: 40rem"></Map>
             <div class="price">Price: {{ event.price }}</div>
         </div>
-        <div class="description">{{ event.description }}</div>
-        <router-link v-if="$store.getters.user.id === event.creator.id"
-           :to="{ name: 'UpdateEvent', params: { id: event.id } }">Update event</router-link>
+        <div class="description">{{ event.description && event.description.length > 255 ? event.description.substring(0, 255) + '…' : event.description }}</div>
     </div>
 </template>
 
 <script>
 import UserLink from '@/components/UI/UserLink'
-import Map from '@/components/UI/Map'
 
 export default {
-    name: 'Event',
+    name: 'EventShorted',
     components: {
-        UserLink,
-        Map
+        UserLink
     },
     props: {
         event: {

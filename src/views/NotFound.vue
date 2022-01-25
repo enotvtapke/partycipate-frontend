@@ -1,10 +1,10 @@
 <template>
-  <p>Not found</p>
+    <p>Not found</p>
 </template>
 
 <script>
 export default {
-  name: 'NotFound'
+    name: 'NotFound'
 }
 </script>
 

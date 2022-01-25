@@ -1,12 +1,10 @@
 <template>
-  <div class="events">
-    Home
-  </div>
+    <div class="events">
+        Home
+    </div>
 </template>
 
 <script>
 
-export default {
-
-}
+export default {}
 </script>
