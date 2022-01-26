@@ -4,7 +4,10 @@
             <label :for="'input' + fieldName">{{ fieldName }}<span v-if="validator.required">*</span></label>
         </div>
         <div class="value">
-            <input class="input" :id="'input' + fieldName" :type="type" :value="modelValue" autocomplete="off"
+            <debouncedInput v-if="debounce" class="input" :id="'input' + fieldName" :type="type"
+                            :value="modelValue" @update="updateInput" autocomplete="off"
+                            :debounceTime="400"/>
+            <input v-else class="input" :id="'input' + fieldName" :type="type" :value="modelValue" autocomplete="off"
                    @input="updateInput">
             <div class="error-message" v-if="validator.$errors.length > 0">{{ validator.$errors[0].$message }}</div>
         </div>
@@ -12,8 +15,11 @@
 </template>
 
 <script>
+import DebouncedInput from '@/components/UI/DebouncedInput'
+
 export default {
     name: 'InputField',
+    components: { DebouncedInput },
     props: {
         fieldName: {
             type: String,
@@ -40,17 +46,7 @@ export default {
     },
     methods: {
         updateInput (event) {
-            if (this.debounce) {
-                if (this.debounceTimer) {
-                    clearTimeout(this.debounceTimer)
-                }
-                this.debounceTimer = setTimeout(() => {
-                    this.$emit('update:modelValue', event.target.value)
-                    this.debounceTimer = null
-                }, 400)
-            } else {
-                this.$emit('update:modelValue', event.target.value)
-            }
+            this.$emit('update:modelValue', event.target.value)
         }
     }
 }

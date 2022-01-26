@@ -12,25 +12,49 @@
             <div class="price">Price: {{ event.price }}</div>
         </div>
         <div class="description">{{ event.description }}</div>
-        <router-link v-if="$store.getters.user.id === event.creator.id"
-           :to="{ name: 'UpdateEvent', params: { id: event.id } }">Update event</router-link>
+        <div v-if="$store.getters.user && $store.getters.user.id === event.creator.id">
+            <router-link
+                :to="{ name: 'UpdateEvent', params: { id: event.id } }">Update event
+            </router-link>
+            <button @click="togglePopup()">Invite users</button>
+            <Popup
+                v-if="popupTrigger"
+                :TogglePopup="togglePopup">
+                <h2>Invite:</h2>
+                <InviteForm :event="event"></InviteForm>
+            </Popup>
+        </div>
     </div>
 </template>
 
 <script>
 import UserLink from '@/components/UI/UserLink'
 import Map from '@/components/UI/Map'
+import Popup from '@/components/UI/Popup'
+import InviteForm from '@/components/InviteForm'
 
 export default {
     name: 'Event',
     components: {
         UserLink,
-        Map
+        Map,
+        Popup,
+        InviteForm
+    },
+    data () {
+        return {
+            popupTrigger: false
+        }
     },
     props: {
         event: {
             type: Object,
             required: true
+        }
+    },
+    methods: {
+        togglePopup () {
+            this.popupTrigger = !this.popupTrigger
         }
     }
 }

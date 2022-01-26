@@ -49,6 +49,18 @@ async function findByLogin (login) {
     })
 }
 
+async function findByLoginPrefix (loginPrefix) {
+    return await axios.get('/api/v1/user/findAllByLoginPrefix', {
+        params: {
+            prefix: loginPrefix
+        }
+    }).then(response => {
+        return response.data
+    }).catch(error => {
+        throw error
+    })
+}
+
 async function isLoginVacant (value) {
     return await axios.get('/api/v1/user/isLoginVacant', {
         params: {
@@ -74,4 +86,4 @@ function logout () {
     store.commit('setUser', null)
 }
 
-export { enter, logout, auth, register, isLoginVacant, findByLogin, update }
+export { enter, logout, auth, register, isLoginVacant, findByLogin, findByLoginPrefix, update }
