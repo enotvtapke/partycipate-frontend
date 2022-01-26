@@ -5,8 +5,7 @@
         </div>
         <div class="value">
             <debouncedInput v-if="debounce" class="input" :id="'input' + fieldName" :type="type"
-                            :value="modelValue" @update="updateInput" autocomplete="off"
-                            :debounceTime="400"/>
+                            :value="modelValue" @update="updateInput" autocomplete="off"/>
             <input v-else class="input" :id="'input' + fieldName" :type="type" :value="modelValue" autocomplete="off"
                    @input="updateInput">
             <div class="error-message" v-if="validator.$errors.length > 0">{{ validator.$errors[0].$message }}</div>
