@@ -5,7 +5,7 @@
         <InputField v-model="event.location" :validator="v$.event.location" fieldName="Location"></InputField>
         <button class="showMapButton" v-if="!map.show" @click="onShowMap">Show on map</button>
         <button class="showMapButton" v-else @click="map.show = false">Without map</button>
-        <Map v-show="map.show" class="map" @click="onClickMap" :mutable=true :markerCoords="event.coords"
+        <Map v-show="map.show" class="map" @click="onClickMap" :mutable=true :markerCoords="event.coordinates"
              :centerCoords="map.centerCoords"></Map>
         <TextareaField v-model="event.description" :validator="v$.event.description"
                        fieldName="Description"></TextareaField>
@@ -40,7 +40,7 @@ export default {
                     name: null,
                     date: null,
                     location: null,
-                    coords: null,
+                    coordinates: { lat: null, lng: null },
                     description: null,
                     price: null
                 }
@@ -54,14 +54,23 @@ export default {
             event: { ...this.eventProp },
             map: {
                 show: false,
-                centerCoords: { ...this.eventProp.coords }
+                centerCoords: { ...this.eventProp.coordinates }
             }
         }
+    },
+    beforeMount () {
+        this.map.show = this.eventProp.coordinates.lat != null && this.eventProp.coordinates.lng != null
     },
     methods: {
         onSubmit () {
             this.v$.$validate()
             if (!this.v$.$error) {
+                if (!this.map.show) {
+                    this.event.coordinates = {
+                        lat: null,
+                        lng: null
+                    }
+                }
                 this.$emit('submit', this.event)
             }
         },
@@ -77,7 +86,7 @@ export default {
             }
         },
         onClickMap (coords) {
-            this.event.coords = coords
+            this.event.coordinates = coords
         }
     },
     validations () {

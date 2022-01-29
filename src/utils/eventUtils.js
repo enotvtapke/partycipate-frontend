@@ -11,7 +11,7 @@ async function createEvent (event) {
 
 async function updateEvent (event) {
     event.jwt = localStorage.getItem('jwt')
-    return await axios.post('/api/v1/event/update', event).then(response => {
+    return await axios.put('/api/v1/event/update', event).then(response => {
         return response.data
     }).catch(error => {
         throw error.response
