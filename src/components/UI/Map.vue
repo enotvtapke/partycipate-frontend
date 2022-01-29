@@ -11,8 +11,8 @@ let marker = null
 let map = null
 const GOOGLE_MAPS_API_KEY = 'AIzaSyBe_rgoTpHfRAnD4RT0KE-EaTBECU40tXk'
 const SAINT_PETERSBURG = {
-    lat: 59.937,
-    lng: 30.308
+    lat: 59.933922,
+    lng: 30.329026
 }
 export default {
     name: 'Map',
@@ -42,10 +42,12 @@ export default {
                 },
                 clickableIcons: false
             })
+            map.setCenter(props.centerCoords)
             marker = new google.maps.Marker({
                 map,
                 anchorPoint: new google.maps.Point(0, -29)
             })
+            marker.setPosition(props.markerCoords)
             if (props.mutable) {
                 google.maps.event.addListener(map, 'click', event => {
                     marker.setPosition(event.latLng)
@@ -62,6 +64,7 @@ export default {
             marker.setPosition(newValue)
         },
         centerCoords: function (newValue) {
+            console.log('a')
             map.setCenter(newValue)
         }
     }

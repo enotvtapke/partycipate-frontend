@@ -26,7 +26,8 @@ export default {
     },
     data () {
         return {
-            users: null
+            users: Array,
+            invitedUsers: Array
         }
     },
     methods: {

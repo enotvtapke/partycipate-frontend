@@ -7,7 +7,7 @@
         <div class="information">
             <div class="date">Date: {{ event.date }}</div>
             <div class="location">Location: {{ event.location }}</div>
-            <Map v-if="event.coords" :centerCoords="event.coords" :markerCoords="event.coords"
+            <Map v-if="event.coordinates.lng && event.coordinates.lat" :centerCoords="event.coordinates" :markerCoords="event.coordinates"
                  style="width: 40rem"></Map>
             <div class="price">Price: {{ event.price }}</div>
         </div>
