@@ -10,6 +10,7 @@ import CreateEvent from '@/views/CreateEvent'
 import EventPage from '@/views/EventPage'
 import UpdateEvent from '@/views/UpdateEvent'
 import UpdateUser from '@/views/UpdateUser'
+import MyInvites from '@/views/MyInvites'
 
 const routes = [
     {
@@ -37,7 +38,8 @@ const routes = [
     {
         path: '/user/:login/update',
         name: 'UpdateUser',
-        component: UpdateUser
+        component: UpdateUser,
+        meta: { auth: true }
     },
     {
         path: '/event',
@@ -53,7 +55,14 @@ const routes = [
     {
         path: '/event/:id/update',
         name: 'UpdateEvent',
-        component: UpdateEvent
+        component: UpdateEvent,
+        meta: { auth: true }
+    },
+    {
+        path: '/invites',
+        name: 'MyInvites',
+        component: MyInvites,
+        meta: { auth: true }
     },
     {
         path: '/:pathMatch(.*)*',

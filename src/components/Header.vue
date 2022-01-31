@@ -10,6 +10,9 @@
                 <li v-if="user">
                     <router-link :to="{ name: 'CreateEvent' }">Create event</router-link>
                 </li>
+                <li v-if="user">
+                    <router-link :to="{ name: 'MyInvites' }">My invites</router-link>
+                </li>
             </ul>
         </nav>
         <div class="nav-enter">
