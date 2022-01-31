@@ -42,12 +42,16 @@ export default {
                 },
                 clickableIcons: false
             })
-            map.setCenter(props.centerCoords)
+            if (props.centerCoords && props.centerCoords.lng && props.centerCoords.lat) {
+                map.setCenter(props.centerCoords)
+            }
             marker = new google.maps.Marker({
                 map,
                 anchorPoint: new google.maps.Point(0, -29)
             })
-            marker.setPosition(props.markerCoords)
+            if (props.markerCoords && props.markerCoords.lng && props.markerCoords.lat) {
+                marker.setPosition(props.markerCoords)
+            }
             if (props.mutable) {
                 google.maps.event.addListener(map, 'click', event => {
                     marker.setPosition(event.latLng)
