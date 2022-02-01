@@ -68,7 +68,6 @@ export default {
             marker.setPosition(newValue)
         },
         centerCoords: function (newValue) {
-            console.log('a')
             map.setCenter(newValue)
         }
     }

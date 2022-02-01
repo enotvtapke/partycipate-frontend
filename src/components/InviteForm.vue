@@ -39,7 +39,6 @@ export default {
         invite (user) {
             if (this.userClass(user) === 'uninvited-user') {
                 invite(this.event.id, user.id).then(invite => {
-                    console.log(invite)
                     this.invitedUserIds.add(invite.receiver.id)
                 })
             }

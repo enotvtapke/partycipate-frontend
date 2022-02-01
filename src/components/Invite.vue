@@ -16,22 +16,17 @@ export default {
     name: 'Invite',
     components: { EventLink },
     props: {
-        invite: {
-            type: Object,
-            required: true
-        }
+        invite: Object
     },
     methods: {
         accept (invite) {
             accept(invite.id).then(invite => {
-                // eslint-disable-next-line vue/no-mutating-props
-                this.invite.status = invite.status
+                this.$emit('update', invite)
             })
         },
         reject (invite) {
             reject(invite.id).then(invite => {
-                // eslint-disable-next-line vue/no-mutating-props
-                this.invite.status = invite.status
+                this.$emit('update', invite)
             })
         }
     }

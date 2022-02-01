@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         togglePopup () {
-            this.popupTrigger = !this.popupTrigger
+            this.popupTrigger ^= true
         }
     }
 }
