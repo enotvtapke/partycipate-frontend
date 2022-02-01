@@ -2,6 +2,7 @@
     <div class="register-form form-box">
         <form @submit.prevent>
             <InputField v-model="user.login" :validator="v$.user.login" fieldName="Login" :debounce="true"></InputField>
+            <InputField v-model="user.email" :validator="v$.user.email" fieldName="Email" :debounce="true"></InputField>
             <InputField v-model="user.name" :validator="v$.user.name" fieldName="Name"></InputField>
             <InputField v-model="user.password" :validator="v$.user.password" fieldName="Password"
                         type="password"></InputField>
@@ -15,8 +16,8 @@
 
 <script>
 import useValidate from '@vuelidate/core'
-import { helpers, required, minLength, maxLength, alphaNum } from '@vuelidate/validators'
-import { enter, register, isLoginVacant } from '@/utils/userUtils'
+import { helpers, required, minLength, maxLength, alphaNum, email } from '@vuelidate/validators'
+import { enter, register, isLoginVacant, isEmailVacant } from '@/utils/userUtils'
 import InputField from '@/components/UI/InputField'
 
 export default {
@@ -26,6 +27,7 @@ export default {
             v$: useValidate(),
             user: {
                 login: '',
+                email: '',
                 name: '',
                 password: ''
             },
@@ -58,6 +60,12 @@ export default {
                     maxLength: helpers.withMessage('Login is too long', maxLength(32)),
                     alphaNum: helpers.withMessage('Login should contain only letters and digits', alphaNum),
                     isLoginVacant: helpers.withMessage('Login is already in use', helpers.withAsync(isLoginVacant)),
+                    $autoDirty: true
+                },
+                email: {
+                    required: helpers.withMessage('Email is required', required),
+                    email: helpers.withMessage('Email is invalid', email),
+                    isLoginVacant: helpers.withMessage('Email is already in use', helpers.withAsync(isEmailVacant)),
                     $autoDirty: true
                 },
                 name: {

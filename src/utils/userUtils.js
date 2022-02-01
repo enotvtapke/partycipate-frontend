@@ -61,12 +61,24 @@ async function findByLoginPrefix (loginPrefix) {
     })
 }
 
-async function isLoginVacant (value) {
+async function isLoginVacant (login) {
     return await axios.get('/api/v1/user/isLoginVacant', {
         params: {
-            login: value
+            login
         }
-    }).then((response) => {
+    }).then(response => {
+        return response.data
+    }).catch(() => {
+        return false
+    })
+}
+
+async function isEmailVacant (email) {
+    return await axios.get('/api/v1/user/isEmailVacant', {
+        params: {
+            email
+        }
+    }).then(response => {
         return response.data
     }).catch(() => {
         return false
@@ -98,4 +110,4 @@ function logout () {
     store.commit('setUser', null)
 }
 
-export { enter, logout, auth, register, isLoginVacant, findByLogin, findByLoginPrefix, findAllFriends, update }
+export { enter, logout, auth, register, isLoginVacant, isEmailVacant, findByLogin, findByLoginPrefix, findAllFriends, update }
