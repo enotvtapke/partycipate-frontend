@@ -31,7 +31,6 @@ async function findAllIncoming () {
             jwt: localStorage.getItem('jwt')
         }
     }).then(response => {
-        console.log(response.data)
         return response.data
     }).catch(error => {
         throw error.response
@@ -46,7 +45,6 @@ async function accept (inviteId) {
             receiverJwt: localStorage.getItem('jwt')
         }
     }).then(response => {
-        console.log(response.data)
         return response.data
     }).catch(error => {
         throw error.response
@@ -60,7 +58,6 @@ async function reject (inviteId) {
             receiverJwt: localStorage.getItem('jwt')
         }
     }).then(response => {
-        console.log(response.data)
         return response.data
     }).catch(error => {
         throw error.response
