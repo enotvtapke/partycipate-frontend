@@ -4,7 +4,7 @@ async function invite (eventId, receiverId) {
     return await axios.post('/api/v1/invite/create', {
         eventId: eventId,
         receiverId: receiverId,
-        jwt: localStorage.getItem('jwt')
+        creatorJwt: localStorage.getItem('jwt')
     }).then(response => {
         return response.data
     }).catch(error => {
