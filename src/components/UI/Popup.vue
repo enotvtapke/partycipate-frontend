@@ -4,7 +4,7 @@
             <button class="popup-close" @click="TogglePopup()">
                 X
             </button>
-            <slot />
+            <slot/>
         </div>
     </div>
 </template>

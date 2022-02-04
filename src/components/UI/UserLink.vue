@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'User', params: { login: user.login } }">
+    <router-link @click.stop :to="{ name: 'User', params: { login: user.login } }">
         <UserPreview :user="user"/>
     </router-link>
 </template>

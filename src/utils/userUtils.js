@@ -81,9 +81,21 @@ async function register (user) {
     })
 }
 
+async function findAllFriends (login) {
+    return await axios.get('/api/v1/user/findAllFriends', {
+        params: {
+            login
+        }
+    }).then(response => {
+        return response.data
+    }).catch(error => {
+        throw error.response
+    })
+}
+
 function logout () {
     localStorage.removeItem('jwt')
     store.commit('setUser', null)
 }
 
-export { enter, logout, auth, register, isLoginVacant, findByLogin, findByLoginPrefix, update }
+export { enter, logout, auth, register, isLoginVacant, findByLogin, findByLoginPrefix, findAllFriends, update }

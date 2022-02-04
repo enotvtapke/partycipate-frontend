@@ -2,11 +2,17 @@
     <div v-if="user" class="user-page">
         <p>{{ user.login }}</p>
         <p>{{ user.name }}</p>
-        <button @click="onAddToFriends" v-if="$store.getters.user && $store.getters.user.id !== user.id">Add to friends</button>
-        <router-link v-if="$store.getters.user && $store.getters.user.id === user.id"
-                     :to="{ name: 'UpdateUser', params: { login: user.login } }">Update credentials
-        </router-link>
-        <EventList :events="userEvents"></EventList>
+        <button @click="onAddToFriends" v-if="$store.getters.user && $store.getters.user.id !== user.id">Add to
+            friends
+        </button>
+        <div v-else>
+            <PopupWithButtonTrigger>
+                <FriendRequestForm></FriendRequestForm>
+            </PopupWithButtonTrigger>
+            <router-link :to="{ name: 'UpdateUser', params: { login: user.login } }">Update credentials</router-link>
+        </div>
+        <FriendList :friends="userFriends"/>
+        <EventList :events="userEvents"/>
     </div>
     <div v-else-if="user === null">
         <NotFound></NotFound>
@@ -16,25 +22,32 @@
 <script>
 import NotFound from '@/views/NotFound'
 import EventList from '@/components/EventList'
-import { findByLogin } from '@/utils/userUtils'
+import FriendList from '@/components/FriendList'
+import { findAllFriends, findByLogin } from '@/utils/userUtils'
 import { findAllByCreatorLogin } from '@/utils/eventUtils'
-import { addFriend } from '@/utils/friendsUtls'
+import { createFriendRequest } from '@/utils/friendsUtls'
+import PopupWithButtonTrigger from '@/components/UI/PopupWithButtonTrigger'
+import FriendRequestForm from '@/components/FriendRequestForm'
 
 export default {
     name: 'User',
     components: {
+        FriendRequestForm,
         NotFound,
-        EventList
+        EventList,
+        FriendList,
+        PopupWithButtonTrigger
     },
     data: function () {
         return {
             user: undefined,
-            userEvents: undefined
+            userEvents: undefined,
+            userFriends: undefined
         }
     },
     methods: {
         onAddToFriends () {
-            addFriend(this.user.login)
+            createFriendRequest(this.user.login)
         }
     },
     beforeMount () {
@@ -47,6 +60,11 @@ export default {
             this.userEvents = events
         }).catch(() => {
             this.userEvents = null
+        })
+        findAllFriends(this.$route.params.login).then(friends => {
+            this.userFriends = friends
+        }).catch(() => {
+            this.userFriends = null
         })
     }
 }
