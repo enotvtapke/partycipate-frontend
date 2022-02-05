@@ -1,10 +1,8 @@
 <template>
     <Header/>
-    <div class="middle">
-        <main>
-            <router-view :key="this.$route.params.login"/>
-        </main>
-    </div>
+    <main class="container mt-3 mb-3">
+        <router-view :key="this.$route.params.login"/>
+    </main>
     <Footer/>
 </template>
 
@@ -23,5 +21,4 @@ export default {
 
 <style lang="scss">
 @import 'assets/css/styles.scss';
-@import 'assets/css/normalize.css';
 </style>

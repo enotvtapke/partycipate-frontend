@@ -1,32 +1,54 @@
 <template>
     <link rel="icon" href="@/assets/favicon.ico">
     <header>
-        <router-link class="logo" :to="{ name: 'Index' }"><img alt="Eventer" src="@/assets/logo.png"></router-link>
-        <nav>
-            <ul>
-                <li>
-                    <router-link :to="{ name: 'Index' }">Home</router-link>
-                </li>
-                <li v-if="user">
-                    <router-link :to="{ name: 'CreateEvent' }">Create event</router-link>
-                </li>
-                <li v-if="user">
-                    <router-link :to="{ name: 'MyInvites' }">My invites</router-link>
-                </li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <router-link class="logo navbar-brand" :to="{ name: 'Index' }">Partycipate</router-link>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navmenu"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navmenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <router-link class="nav-link" :to="{ name: 'Index' }">Home</router-link>
+                        </li>
+                        <li class="nav-item" v-if="user">
+                            <router-link class="nav-link" :to="{ name: 'CreateEvent' }">Create event</router-link>
+                        </li>
+                        <li class="nav-item" v-if="user">
+                            <router-link class="nav-link" :to="{ name: 'MyInvites' }">My invites</router-link>
+                        </li>
+                        <template v-if="user">
+                            <li class="nav-item">
+                                <UserLink class="nav-link" :user=user></UserLink>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" @click.prevent="onLogout">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/enter">Enter</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/register">Register</router-link>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
         </nav>
-        <div class="nav-enter">
-            <template v-if="user">
-                <UserLink :user=user></UserLink>
-                |
-                <a href="#" @click.prevent="onLogout">Logout</a>
-            </template>
-            <template v-else>
-                <router-link to="/enter">Enter</router-link>
-                |
-                <router-link to="/register">Register</router-link>
-            </template>
-        </div>
     </header>
 </template>
 
@@ -51,34 +73,28 @@ export default {
 </script>
 
 <style scoped>
-header {
-    border-bottom: 2px var(--border-color) solid;
-    margin-bottom: 1rem;
-    height: 3rem;
-}
+/*.logo img {*/
+/*    padding-top: 0.25rem;*/
+/*    height: 2rem;*/
+/*    margin-right: 2rem;*/
+/*}*/
 
-.logo img {
-    padding-top: 0.25rem;
-    height: 2rem;
-    margin-right: 2rem;
-}
+/*header * {*/
+/*    display: inline-block;*/
+/*}*/
 
-header * {
-    display: inline-block;
-}
+/*header nav ul {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
 
-header nav ul {
-    margin: 0;
-    padding: 0;
-}
+/*header nav li {*/
+/*    margin-right: 2rem;*/
+/*}*/
 
-header nav li {
-    margin-right: 2rem;
-}
-
-.nav-enter {
-    float: right;
-    line-height: 2rem;
-    vertical-align: middle;
-}
+/*.nav-enter {*/
+/*    float: right;*/
+/*    line-height: 2rem;*/
+/*    vertical-align: middle;*/
+/*}*/
 </style>

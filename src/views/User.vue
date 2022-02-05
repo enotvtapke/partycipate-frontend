@@ -1,15 +1,28 @@
 <template>
     <div v-if="user" class="user-page">
-        <p>{{ user.login }}</p>
-        <p>{{ user.name }}</p>
-        <button @click="onAddToFriends" v-if="$store.getters.user && $store.getters.user.id !== user.id">Add to
-            friends
+        <h3>{{ user.name }}</h3>
+        <p class="text-muted">{{ user.login }}</p>
+        <button class="btn btn-primary btn-sm" @click="onAddToFriends" v-if="$store.getters.user && $store.getters.user.id !== user.id">
+            Add to friends
         </button>
         <div v-else>
-            <PopupWithButtonTrigger>
-                <FriendRequestForm></FriendRequestForm>
-            </PopupWithButtonTrigger>
             <router-link :to="{ name: 'UpdateUser', params: { login: user.login } }">Update credentials</router-link>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#findFriendsModal">
+                Find friends
+            </button>
+            <div class="modal" id="findFriendsModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add friend</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <FriendRequestForm></FriendRequestForm>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <FriendList :friends="userFriends"/>
         <EventList :events="userEvents"/>
@@ -26,7 +39,6 @@ import FriendList from '@/components/FriendList'
 import { findAllFriends, findByLogin } from '@/utils/userUtils'
 import { findAllByCreatorLogin } from '@/utils/eventUtils'
 import { createFriendRequest } from '@/utils/friendsUtls'
-import PopupWithButtonTrigger from '@/components/UI/PopupWithButtonTrigger'
 import FriendRequestForm from '@/components/FriendRequestForm'
 
 export default {
@@ -35,8 +47,7 @@ export default {
         FriendRequestForm,
         NotFound,
         EventList,
-        FriendList,
-        PopupWithButtonTrigger
+        FriendList
     },
     data: function () {
         return {

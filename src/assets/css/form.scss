@@ -1,19 +1,11 @@
-.error {
-  border-color: red;
-}
-
 .form-box {
   margin: auto;
-  width: 15rem;
+  max-width: 15rem;
 }
 
 .event-form-box {
   margin: auto;
-  width: 30rem;
-}
-
-.form-box .field {
-  margin-bottom: 1.5rem;
+  max-width: 30rem;
 }
 
 .error-message {

@@ -1,6 +1,6 @@
 <template>
-    <button @click="refresh" class="refresh">Refresh</button>
-    <div class="invites">
+    <button @click="refresh" class="btn btn-secondary btn-sm">Refresh</button>
+    <div class="invites mt-2">
         <div>
             Waiting:
             <Invite v-for="invite of waiting" :key="invite.id" :invite="invite" @update="update"/>

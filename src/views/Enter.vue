@@ -4,9 +4,7 @@
             <InputField v-model="login" :validator="v$.login" fieldName="Login"></InputField>
             <InputField v-model="password" :validator="v$.password" fieldName="Password" type="password"></InputField>
             <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
-            <div class="button-field">
-                <input @click="onEnter" type="submit" value="Enter">
-            </div>
+            <button class="btn btn-primary" @click="onEnter">Enter</button>
         </form>
     </div>
 </template>

@@ -1,6 +1,5 @@
 <template>
     <div class="events">
-        Home
     </div>
 </template>
 

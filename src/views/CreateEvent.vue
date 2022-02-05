@@ -1,5 +1,5 @@
 <template>
-    <EventForm :serverValidationError="serverValidationError" @submit="onCreateEvent"></EventForm>
+    <EventForm :serverValidationError="serverValidationError" @onSubmit="onCreateEvent"></EventForm>
 </template>
 
 <script>

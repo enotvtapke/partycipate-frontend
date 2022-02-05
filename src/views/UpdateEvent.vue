@@ -30,8 +30,8 @@ export default {
         })
     },
     methods: {
-        onUpdateEvent (event) {
-            updateEvent(event).then(event => {
+        onUpdateEvent () {
+            updateEvent(this.event).then(event => {
                 this.$router.push('/event/' + event.id)
             }).catch(error => {
                 this.serverValidationError = error.data

@@ -1,15 +1,11 @@
 <template>
-    <div class="field" :class="{ error: validator.$errors.length > 0 }">
-        <div class="name">
-            <label :for="'input' + fieldName">{{ fieldName }}<span v-if="validator.required">*</span></label>
-        </div>
-        <div class="value">
-            <debouncedInput v-if="debounce" class="input" :id="'input' + fieldName" :type="type"
-                            :value="modelValue" @update="updateInput" autocomplete="off"/>
-            <input v-else class="input" :id="'input' + fieldName" :type="type" :value="modelValue" autocomplete="off"
-                   @input="updateInput">
-            <div class="error-message" v-if="validator.$errors.length > 0">{{ validator.$errors[0].$message }}</div>
-        </div>
+    <div class="mb-3 mt-3" :class="{ error: validator.$errors.length > 0 }">
+        <label :for="'input' + fieldName">{{ fieldName }}<span v-if="validator.required">*</span></label>
+        <debouncedInput v-if="debounce" class="input" :id="'input' + fieldName" :type="type"
+                        :value="modelValue" @update="updateInput" autocomplete="off"/>
+        <input v-else class="form-control" :id="'input' + fieldName" :type="type" :value="modelValue" autocomplete="off"
+               @input="updateInput">
+        <div class="error-message" v-if="validator.$errors.length > 0">{{ validator.$errors[0].$message }}</div>
     </div>
 </template>
 
@@ -52,13 +48,6 @@ export default {
 </script>
 
 <style scoped>
-.input {
-    width: 100%;
-    border: 1px solid black;
-    padding: 10px 15px;
-    margin-top: 15px;
-}
-
 .error-message {
     position: absolute;
     color: red;
