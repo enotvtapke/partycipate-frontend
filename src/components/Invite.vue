@@ -3,8 +3,8 @@
         To: <EventLink :event="invite.event"/>
         Status: {{ invite.status }}
         <div v-if="invite.status !== 'ACCEPTED'">
-            <button class="accept-invite-button" @click="accept(invite)">Accept</button>
-            <button v-if="invite.status !== 'REJECTED'" class="ignore-invite-button" @click="reject(invite)">Ignore</button>
+            <button class="btn btn-success btn-sm me-2" @click="accept(invite)">Accept</button>
+            <button class="btn btn-danger btn-sm" v-if="invite.status !== 'REJECTED'" @click="reject(invite)">Ignore</button>
         </div>
     </div>
 </template>

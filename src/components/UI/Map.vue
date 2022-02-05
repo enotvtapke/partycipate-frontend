@@ -1,5 +1,5 @@
 <template>
-    <div ref="mapContainer" style="width: 100%; height: 20rem"></div>
+    <div ref="mapContainer" style="max-width: 40rem; width: 100%; height: 20rem"></div>
 </template>
 
 <script>

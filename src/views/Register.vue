@@ -7,9 +7,7 @@
             <InputField v-model="user.password" :validator="v$.user.password" fieldName="Password"
                         type="password"></InputField>
             <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
-            <div class="button-field">
-                <input @click="onRegister" type="submit" value="Enter">
-            </div>
+            <button class="btn btn-primary" @click="onRegister">Register</button>
         </form>
     </div>
 </template>

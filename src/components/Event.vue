@@ -3,12 +3,11 @@
         <div class="creator">By:
             <UserLink :user="event.creator"></UserLink>
         </div>
-        <div class="name"><h2>{{ event.name }}</h2></div>
+        <div class="name text-primary"><h2>{{ event.name }}</h2></div>
         <div class="information">
             <div class="date">Date: {{ event.date }}</div>
             <div class="location">Location: {{ event.location }}</div>
-            <Map v-if="event.coordinates.lng && event.coordinates.lat" :centerCoords="event.coordinates" :markerCoords="event.coordinates"
-                 style="width: 40rem"></Map>
+            <Map v-if="event.coordinates.lng && event.coordinates.lat" :centerCoords="event.coordinates" :markerCoords="event.coordinates"></Map>
             <div class="price">Price: {{ event.price }}</div>
         </div>
         <div class="description">{{ event.description }}</div>

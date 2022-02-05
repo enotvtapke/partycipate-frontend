@@ -1,5 +1,5 @@
 <template>
-    <div class="event">
+    <div class="event mt-1 mb-1">
         <div class="creator">By:
             <UserLink :user="event.creator"></UserLink>
         </div>
