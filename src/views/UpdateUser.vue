@@ -1,12 +1,11 @@
 <template>
     <div v-if="user" class="register-form form-box">
-        <form @submit.prevent="onSubmit">
+        <form @submit.prevent>
             <InputField v-model="user.login" :validator="v$.user.login" fieldName="Login" :debounce="true"></InputField>
             <InputField v-model="user.name" :validator="v$.user.name" fieldName="Name"></InputField>
             <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
-            <div class="button-field">
-                <input type="submit" value="Change">
-            </div>
+            <button class="btn btn-primary btn-sm" @click="onSubmit">Change</button>
+            <button class="btn btn-primary btn-sm mt-6" @click="requestPasswordChange">Change password</button>
         </form>
     </div>
 </template>
@@ -14,7 +13,7 @@
 <script>
 import useValidate from '@vuelidate/core'
 import { helpers, required, minLength, maxLength, alphaNum } from '@vuelidate/validators'
-import { auth, isLoginVacant, update } from '@/utils/userUtils'
+import { auth, isLoginVacant, requestPasswordChange, update } from '@/utils/userUtils'
 import InputField from '@/components/UI/InputField'
 
 export default {
@@ -44,6 +43,13 @@ export default {
         },
         async isLoginVacant (value) {
             return value === this.$store.getters.user.login || await isLoginVacant(value)
+        },
+        requestPasswordChange () {
+            requestPasswordChange(this.$store.getters.user.login).then(() => {
+                this.$router.push({ name: 'MessagePage', params: { message: 'We sent link to your email' } })
+            }).catch(error => {
+                this.$router.push({ name: 'MessagePage', params: { message: error.data } })
+            })
         }
     },
     validations () {
