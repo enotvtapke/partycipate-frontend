@@ -15,7 +15,7 @@
 <script>
 import useValidate from '@vuelidate/core'
 import { helpers, required, minLength, maxLength, alphaNum, email } from '@vuelidate/validators'
-import { enter, register, isLoginVacant, isEmailVacant } from '@/utils/userUtils'
+import { register, isLoginVacant, isEmailVacant } from '@/utils/userUtils'
 import InputField from '@/components/UI/InputField'
 
 export default {
@@ -38,11 +38,8 @@ export default {
         onRegister () {
             this.v$.$validate()
             if (!this.v$.$error) {
-                const password = this.user.password
-                register(this.user).then(response => {
-                    enter(response.login, password).then(() => {
-                        this.$router.push({ name: 'Index' })
-                    })
+                register(this.user).then(() => {
+                    this.$router.push({ name: 'MessagePage', params: { message: 'Verify your email' } })
                 }).catch(error => {
                     this.serverValidationError = error.data
                 })

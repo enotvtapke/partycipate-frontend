@@ -42,4 +42,16 @@ async function findAllByCreatorLogin (login) {
     })
 }
 
-export { createEvent, findById, updateEvent, findAllByCreatorLogin }
+async function findAllByNamePrefix (prefix) {
+    return await axios.get('/api/v1/event/findAllByNamePrefix', {
+        params: {
+            prefix
+        }
+    }).then(response => {
+        return response.data
+    }).catch((error) => {
+        throw error
+    })
+}
+
+export { createEvent, findById, updateEvent, findAllByCreatorLogin, findAllByNamePrefix }

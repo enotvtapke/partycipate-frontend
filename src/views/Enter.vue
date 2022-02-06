@@ -4,7 +4,8 @@
             <InputField v-model="login" :validator="v$.login" fieldName="Login"></InputField>
             <InputField v-model="password" :validator="v$.password" fieldName="Password" type="password"></InputField>
             <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
-            <button class="btn btn-primary" @click="onEnter">Enter</button>
+            <button class="btn btn-primary me-4" @click="onEnter">Enter</button>
+            <router-link :to="{ name: 'ForgotPassword' }">Forgot password</router-link>
         </form>
     </div>
 </template>

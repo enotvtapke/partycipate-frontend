@@ -1,5 +1,6 @@
 import store from '@/store'
 import axios from 'axios'
+import router from '@/router'
 
 async function enter (login, password) {
     await axios.get('/api/v1/user/createJwt', {
@@ -110,4 +111,28 @@ function logout () {
     store.commit('setUser', null)
 }
 
-export { enter, logout, auth, register, isLoginVacant, isEmailVacant, findByLogin, findByLoginPrefix, findAllFriends, update }
+async function requestPasswordChange (loginOrEmail) {
+    await axios.get('/api/v1/user/requestPasswordChange', {
+        params: {
+            loginOrEmail
+        }
+    }).then(() => {
+        router.push({ name: 'MessagePage', params: { message: 'Check your email' } })
+    }).catch(error => {
+        router.push({ name: 'MessagePage', params: { message: error.response.data } })
+    })
+}
+
+export {
+    enter,
+    logout,
+    auth,
+    register,
+    isLoginVacant,
+    isEmailVacant,
+    findByLogin,
+    findByLoginPrefix,
+    findAllFriends,
+    update,
+    requestPasswordChange
+}

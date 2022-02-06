@@ -11,6 +11,8 @@ import EventPage from '@/views/EventPage'
 import UpdateEvent from '@/views/UpdateEvent'
 import UpdateUser from '@/views/UpdateUser'
 import MyInvites from '@/views/MyInvites'
+import MessagePage from '@/views/MessagePage'
+import ForgotPassword from '@/views/ForgotPassword'
 
 const routes = [
     {
@@ -63,6 +65,17 @@ const routes = [
         name: 'MyInvites',
         component: MyInvites,
         meta: { auth: true }
+    },
+    {
+        path: '/notification?:message',
+        name: 'MessagePage',
+        component: MessagePage
+    },
+    {
+        path: '/forgotPassword',
+        name: 'ForgotPassword',
+        component: ForgotPassword,
+        meta: { auth: false }
     },
     {
         path: '/:pathMatch(.*)*',
