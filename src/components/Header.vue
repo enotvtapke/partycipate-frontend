@@ -73,28 +73,4 @@ export default {
 </script>
 
 <style scoped>
-/*.logo img {*/
-/*    padding-top: 0.25rem;*/
-/*    height: 2rem;*/
-/*    margin-right: 2rem;*/
-/*}*/
-
-/*header * {*/
-/*    display: inline-block;*/
-/*}*/
-
-/*header nav ul {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*}*/
-
-/*header nav li {*/
-/*    margin-right: 2rem;*/
-/*}*/
-
-/*.nav-enter {*/
-/*    float: right;*/
-/*    line-height: 2rem;*/
-/*    vertical-align: middle;*/
-/*}*/
 </style>
