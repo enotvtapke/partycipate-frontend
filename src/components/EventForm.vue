@@ -61,10 +61,8 @@ export default {
     },
     methods: {
         onSubmit () {
-            console.log('aaa')
             this.v$.$validate()
             if (!this.v$.$error) {
-                console.log('bbb')
                 if (!this.map.show) {
                     this.event.coordinates = {
                         lat: null,
