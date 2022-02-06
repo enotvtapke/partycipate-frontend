@@ -1,11 +1,11 @@
 <template>
-    <div class="mb-3 mt-3" :class="{ error: validator.$errors.length > 0 }">
-        <label :for="'input' + fieldName">{{ fieldName }}<span v-if="validator.required">*</span></label>
+    <div class="mb-3 mt-3" :class="{ error: validator && validator.$errors.length > 0 }">
+        <label :for="'input' + fieldName">{{ fieldName }}<span v-if="validator && validator.required">*</span></label>
         <debouncedInput v-if="debounce" class="input" :id="'input' + fieldName" :type="type"
                         :value="modelValue" @update="updateInput" autocomplete="off"/>
         <input v-else class="form-control" :id="'input' + fieldName" :type="type" :value="modelValue" autocomplete="off"
                @input="updateInput">
-        <div class="error-message" v-if="validator.$errors.length > 0">{{ validator.$errors[0].$message }}</div>
+        <div class="error-message" v-if="validator && validator.$errors.length > 0">{{ validator.$errors[0].$message }}</div>
     </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
         },
         validator: {
             type: Object,
-            required: true
+            default: null
         },
         modelValue: [String, Number],
         type: {
