@@ -7,7 +7,8 @@
             <InputField v-model="user.password" :validator="v$.user.password" fieldName="Password"
                         type="password"></InputField>
             <div class="form-error-message" v-if="serverValidationError">{{ serverValidationError }}</div>
-            <button class="btn btn-primary" @click="onRegister">Register</button>
+            <button class="btn btn-primary mt-2" @click="onRegister">Register</button>
+            <div class="text-muted terms-of-service-msg mt-2">By creating an account, you agree to receive account-related emails.</div>
         </form>
     </div>
 </template>
@@ -84,4 +85,7 @@ export default {
 
 <style scoped>
 @import '../assets/css/form.scss';
+.terms-of-service-msg {
+    font-size: 0.8rem;
+}
 </style>

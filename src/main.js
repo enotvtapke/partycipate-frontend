@@ -14,7 +14,7 @@ window.axios.defaults.headers = {
 // window.axios = require('axios')
 // window.axios.defaults.baseURL = 'http://localhost:8080'
 // window.axios.defaults.headers = {
-//     'Access-Control-Allow-Origin': 'http://localhost:3000'
+//     'Access-Control-Allow-Origin': 'http://localhost:8090'
 // }
 
 const app = createApp(App)

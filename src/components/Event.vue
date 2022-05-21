@@ -11,6 +11,9 @@
             <div class="price">Price: {{ event.price }}</div>
         </div>
         <div class="description">{{ event.description }}</div>
+        <div class="guests">
+            <GuestList :guests="event.guests"></GuestList>
+        </div>
         <div v-if="$store.getters.user && $store.getters.user.id === event.creator.id">
             <router-link
                 :to="{ name: 'UpdateEvent', params: { id: event.id } }">Update event
@@ -31,10 +34,12 @@ import UserLink from '@/components/UI/UserLink'
 import Map from '@/components/UI/Map'
 import Popup from '@/components/UI/Popup'
 import InviteForm from '@/components/InviteForm'
+import GuestList from '@/components/GuestsList'
 
 export default {
     name: 'Event',
     components: {
+        GuestList,
         UserLink,
         Map,
         Popup,

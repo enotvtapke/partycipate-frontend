@@ -1,6 +1,6 @@
 <template>
     <EventForm v-if="event" :serverValidationError="serverValidationError" :eventProp="event"
-               @submit="onUpdateEvent"></EventForm>
+               @onSubmit="onUpdateEvent"></EventForm>
 </template>
 
 <script>
@@ -30,8 +30,9 @@ export default {
         })
     },
     methods: {
-        onUpdateEvent () {
-            updateEvent(this.event).then(event => {
+        onUpdateEvent (event) {
+            console.log(event)
+            updateEvent(event).then(event => {
                 this.$router.push('/event/' + event.id)
             }).catch(error => {
                 this.serverValidationError = error.data
